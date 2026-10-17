@@ -28,8 +28,13 @@ jobs:
         if [ ! -f buildozer.spec ]; then
           buildozer init
         fi
+        
+        # Requirements aur License automatic set karne ke liye
         sed -i "s/#requirements = python3/requirements = python3,kivy/" buildozer.spec
         sed -i "s/requirements = python3/requirements = python3,kivy/" buildozer.spec
+        sed -i "s/#android.accept_sdk_license = False/android.accept_sdk_license = True/" buildozer.spec
+        sed -i "s/android.accept_sdk_license = False/android.accept_sdk_license = True/" buildozer.spec
+        
         buildozer -v android debug
 
     - name: Upload APK Artifact
